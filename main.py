@@ -8,13 +8,17 @@ es = Elasticsearch(
     cloud_id=config['ELASTIC']['cloud_id'],
     http_auth=(config['ELASTIC']['user'], config['ELASTIC']['password'])
 )
-name = input("What is your name ")
-quote = input("What is your quote ")
-#es.indices.create("new_index")
-es.index(index="new_index",
-         body={
-             "name": name,
-             "quote": quote
-         })
+run = True
+while run:
+    option = input("close to shutdown")
+    if option == "close":
+        run = False
 
-print(es.info())
+    else:
+        name = input("What is your name ")
+        quote = input("What is your quote ")
+        es.index(index="new_index",
+            body={
+                "name": name,
+                "quote": quote
+         })
